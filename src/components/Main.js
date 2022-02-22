@@ -1,10 +1,15 @@
-import React from "react"
+import { useState } from 'react'
 import TaskList from "./TaskList"
+import NewTask from "./NewTask"
+
 export default function Main() {
+    const [tasks, setTasks] = useState([])
+    const [loading, setLoading] = useState([])
     return (
-        <section>
-            <h1>Much Todo</h1>
-            <TaskList />
+        <section style={{ background: 'white', padding: '0 40px 40px' }}>
+            <TaskList tasks={tasks} setTasks={setTasks} loading={loading} setLoading={setLoading} />
+            <br />
+            <NewTask setTasks={setTasks} setLoading={setLoading} />
         </section>
     )
 }

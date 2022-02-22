@@ -1,9 +1,33 @@
-import React from 'react';
-import Main from './components/Main'
+import React from 'react'
+import { Layout } from 'antd';
+import Main from './components/Main';
+import './App.css'
+
+const styles = {
+  header: {
+    position: 'fixed',
+    zIndex: 10,
+    width: '100%',
+    color: 'white',
+  },
+  content: {
+    padding: '0 50px',
+    marginTop: 64,
+  },
+}
 
 function App() {
   return (
-    <Main />
-  )
+    <Layout>
+      <Layout.Header style={styles.header}>
+        Much Todo
+      </Layout.Header>
+      <Layout.Content style={styles.content}>
+        <Main />
+      </Layout.Content>
+      <Layout.Footer>&copy; 2022, Boca Code.</Layout.Footer>
+    </Layout>
+  );
 }
+
 export default App;

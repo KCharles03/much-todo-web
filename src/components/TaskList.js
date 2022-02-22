@@ -1,22 +1,31 @@
-import React from 'react'
+import React from "react";
+import { useEffect } from 'react'
 import { List } from 'antd'
 import Task from './Task'
 
-const tasks = [
-    { id: 1, task: 'Buy Beer', done: false },
-    { id: 2, task: 'Buy Trulys', done: false },
-    { id: 3, task: 'Buy Milk', done: false },
-    { id: 4, task: 'Buy Wine', done: false },
-    { id: 5, task: 'Buy Paper Towels', done: false },
-]
-export default function TaskList() {
+export default function TaskList({ tasks, setTasks, loading, setLoading }) {
+    useEffect(() => {
+        // GET DATA FROM API
+        setLoading(true)
+        fetch('https://much-todo-kc.uc.r.appspot.com/tasks')
+            .then(response => response.json())
+            .then(data => {
+                setTasks(data)
+                setLoading(false)
+            })
+            .catch(err => {
+                alert(err)
+                setLoading(false)
+            })
+    }, [])
+
     return (
         <List
-            bordered
+            loading={loading}
             dataSource={tasks}
-            renderItem={item => (
-                <List.Item>{item.task}</List.Item>
-            )}
+            size="large"
+            bordered
+            renderItem={item => <Task item={item} setLoading={setLoading} setTasks={setTasks} />}
         />
     )
 }
